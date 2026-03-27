@@ -15,3 +15,8 @@ spring:
 
 server:
   port: 9000
+
+invoice:
+  directories:
+    - /path/to/invoices/directory1
+    - /path/to/invoices/directory2
