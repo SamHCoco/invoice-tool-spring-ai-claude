@@ -4,12 +4,31 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  datasource:
+    url: jdbc:mysql://localhost:3306/claude_invoice?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
+    schemas: claude_invoice
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
   ai:
     anthropic:
       api-key: ${ANTHROPIC_API_KEY}
       chat:
         options:
-          model: claude-haiku-4.5
+          model: claude-haiku-4-5-20251001
           temperature: 0.3
           max-tokens: 300
 
@@ -18,5 +37,5 @@ server:
 
 invoice:
   directories:
-    - /path/to/invoices/directory1
-    - /path/to/invoices/directory2
+    - ${INVOICE_DIR_1}
+    - ${INVOICE_DIR_2}
