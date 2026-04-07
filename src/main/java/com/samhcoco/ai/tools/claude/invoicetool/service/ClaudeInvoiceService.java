@@ -119,6 +119,8 @@ public class ClaudeInvoiceService {
                 - company: the paying organisation (not the individual recipient); use the shortest recognisable name, applied consistently
                 - amount: decimal, no currency symbols
                 Only include transactions contributing to the invoice total.
+                For any transactions that contribute to the total but are not tied to a specific date, like the other transactions, 
+                set their date as the highest date from the transactions with dates for all of them.
                 PDF text:
                 """ + pdfText;
 
